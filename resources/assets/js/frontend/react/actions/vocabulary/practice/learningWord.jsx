@@ -19,3 +19,13 @@ export const getWordByDate = (date) => {
         });
     }
 };
+
+export const onFinished = (id) => {
+      return axios.get(laroute.route('frontend.vocabulary.update-practiced'), {
+          params: {
+              id: id
+          }
+      }).then(response => {
+         console.log(response);
+      });
+};

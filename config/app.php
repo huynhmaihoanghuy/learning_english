@@ -203,6 +203,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Lord\Laroute\LarouteServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
+        Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
 
     ],
 

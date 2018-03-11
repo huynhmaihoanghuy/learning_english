@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import LearningWord from '../../components/vocabulary/practice/LearningWord';
-import {getWordByDate} from '../../actions/vocabulary/practice/learningWord';
+import {getWordByDate, onFinished} from '../../actions/vocabulary/practice/learningWord';
 
 const PracticeVocabulary = (props) => {
-    let {getWordsByDate} = props;
+    let {getWordsByDate, words, onFinished} = props;
     return (
         <div>
-            <LearningWord newWord="ABCDEF" onGetWordsByDate={getWordsByDate}/>
+            <LearningWord words={words} onGetWordsByDate={getWordsByDate} onFinished={onFinished}/>
         </div>
     )
 };
@@ -15,7 +15,7 @@ const PracticeVocabulary = (props) => {
 const mapStateToProps = (state) => {
     console.log(state);
     return {
-
+        words: state.learningReducer
     }
 };
 
@@ -23,6 +23,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getWordsByDate: (date) => {
             dispatch(getWordByDate(date));
+        },
+        onFinished: (id) => {
+            onFinished(id);
         }
     }
 };

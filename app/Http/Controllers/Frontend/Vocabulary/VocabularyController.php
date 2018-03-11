@@ -7,6 +7,7 @@ use App\Http\Requests\Frontend\Vocabulary\RemoveWordRequest;
 use App\Repositories\Frontend\Access\Vocabulary\VocabularyRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use JavaScript;
 
 class VocabularyController extends Controller
 {
@@ -82,7 +83,30 @@ class VocabularyController extends Controller
         if (strtotime($date) == false) {
             return redirect()->route('frontend.vocabulary.learn');
         } else {
+            JavaScript::put([
+                'date_for_learn' => $date
+            ]);
+
             return view('frontend.vocabulary.practice');
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updatePracticed(Request $request)
+    {
+        $requestData = $request->all();
+        if (!empty($requestData['id'])) {
+            $response = $this->vocabularyRepository->updatePracticed($requestData['id']);
+            return response()->json($response);
+        } else {
+            return response()->json([
+                'result'    => 'warning',
+                'status'    => 'warning',
+                'message'   => 'Cannot find id'
+            ]);
         }
     }
 }

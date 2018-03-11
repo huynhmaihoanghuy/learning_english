@@ -105,4 +105,38 @@ class VocabularyRepository extends BaseRepository
             ];
         }
     }
+
+    /**
+     * @param $id
+     * @return array
+     */
+    public function updatePracticed($id)
+    {
+        $wordData = $this->find($id);
+        if ($wordData != null) {
+            $wordData->is_practiced = true;
+
+            try {
+                $wordData->save();
+
+                return [
+                    'result'    => 'ok',
+                    'status'    => 'success'
+                ];
+            } catch (\Exception $exception) {
+                return [
+                    'result'    => 'error',
+                    'status'    => 'error',
+                    'message'   => $exception->getMessage()
+                ];
+            }
+
+        } else {
+            return [
+                'result'    => 'error',
+                'status'    => 'error',
+                'message'   => 'Cannot find data'
+            ];
+        }
+    }
 }

@@ -17,7 +17,7 @@ class Vocabulary extends Model
      *
      * @var array
      */
-    protected $fillable = ['word', 'spelling', 'description', 'user_id', 'date'];
+    protected $fillable = ['word', 'spelling', 'description', 'user_id', 'date', 'is_practiced'];
 
     /**
      * @param array $attributes
