@@ -150,4 +150,21 @@ class VocabularyRepository extends BaseRepository
             ->where('user_id', '=', $userId)
             ->first();
     }
+
+    /**
+     * @param $userId
+     * @param int|null $isPracticed
+     * @return mixed
+     */
+    public function getVocabularyPracticeByUser($userId, $isPracticed = null)
+    {
+        $query = $this->query()
+            ->where('user_id', '=', $userId);
+
+        if ($isPracticed != null) {
+            $query->where('is_practiced', '=', intval($isPracticed));
+        }
+
+        return $query->first();
+    }
 }

@@ -3,6 +3,7 @@ import moment from 'moment';
 import RemoveWordAction from '../../elements/vocabulary/add_word/DeleteWord';
 import LearnNewWordButton from '../../elements/vocabulary/add_word/LearnNewWordButton';
 import LearnANewWord from '../../elements/vocabulary/add_word/LearnANewWord';
+import Actions from "../../elements/vocabulary/add_word/Actions";
 
 class AddedWord extends Component {
     render() {
@@ -35,9 +36,7 @@ class AddedWord extends Component {
                                             <td>{ value.word }</td>
                                             <td>{ value.description }</td>
                                             <td>
-                                                <RemoveWordAction data={value} removeWord={this.props.removeWord}/>
-                                                &nbsp; &nbsp;
-                                                <LearnANewWord data={value} removeWord={this.props.removeWord}/>
+                                                <Actions data={value} addedTotal={addedWordArray.length} removeWord={this.props.removeWord}/>
                                             </td>
                                         </tr>
                                     )

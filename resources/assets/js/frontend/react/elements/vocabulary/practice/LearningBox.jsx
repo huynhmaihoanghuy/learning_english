@@ -65,7 +65,7 @@ class LearningBox extends Component {
         return (
             <div className="panel panel-default">
                 <div className="panel-heading">
-                    New word: <span className="new-word-practice">{this.props.data.word}</span>
+                    New word: <span className="new-word-practice">{this.props.data.word} (Mean: {this.props.data.description})</span>
 
                     <Notification number={this.state.results.length} onFinished={this.props.onFinished} id={this.props.data.id} isPracticed={this.props.data.is_practiced}/>
                 </div>

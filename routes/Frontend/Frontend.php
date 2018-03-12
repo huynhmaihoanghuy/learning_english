@@ -30,4 +30,8 @@ Route::group(['middleware' => 'auth'], function () {
          */
         Route::patch('profile/update', 'ProfileController@update')->name('profile.update');
     });
+
+    Route::group(['namespace' => 'Vocabulary', 'as' => 'vocabulary.', 'prefix' => 'vocabulary'], function() {
+        Route::get('/', 'VocabularyController@index')->name('index');
+    });
 });

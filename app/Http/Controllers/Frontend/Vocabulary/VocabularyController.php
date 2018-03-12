@@ -25,10 +25,15 @@ class VocabularyController extends Controller
      */
     public function index()
     {
+        return view('frontend.vocabulary.index');
+    }
+
+    public function learn()
+    {
         $userId = access()->user()->id;
-        $vocabularyData = $this->vocabularyRepository->getByUser($userId);
+        $vocabularyData = $this->vocabularyRepository->getVocabularyPracticeByUser($userId, '0');
         if ($vocabularyData == null) {
-            return view('frontend.vocabulary.index');
+            return view('frontend.vocabulary.learn');
         } else {
             $date = date('m-d-Y', strtotime($vocabularyData->date));
             return redirect()->route('frontend.vocabulary.practice', ['date' => $date]);

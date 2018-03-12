@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#frontend-navbar-collapse">
@@ -29,7 +29,8 @@
                 @endif
 
                 @if ($logged_in_user)
-                    <li>{{ link_to_route('frontend.user.dashboard', trans('navs.frontend.dashboard'), [], ['class' => active_class(Active::checkRoute('frontend.user.dashboard')) ]) }}</li>
+                        <li>{{ link_to_route('frontend.vocabulary.index', 'Vocabulary', [], ['class' => active_class(Active::checkRoute('frontend.vocabulary.index')) ]) }}</li>
+{{--                    <li>{{ link_to_route('frontend.user.dashboard', trans('navs.frontend.dashboard'), [], ['class' => active_class(Active::checkRoute('frontend.user.dashboard')) ]) }}</li>--}}
                 @endif
 
                 @if (! $logged_in_user)
