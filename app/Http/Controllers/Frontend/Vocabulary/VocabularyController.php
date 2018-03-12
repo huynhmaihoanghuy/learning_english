@@ -20,9 +20,19 @@ class VocabularyController extends Controller
         $this->vocabularyRepository = $vocabularyRepository;
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
-        return view('frontend.vocabulary.index');
+        $userId = access()->user()->id;
+        $vocabularyData = $this->vocabularyRepository->getByUser($userId);
+        if ($vocabularyData == null) {
+            return view('frontend.vocabulary.index');
+        } else {
+            $date = date('m-d-Y', strtotime($vocabularyData->date));
+            return redirect()->route('frontend.vocabulary.practice', ['date' => $date]);
+        }
     }
 
     /**
@@ -107,6 +117,28 @@ class VocabularyController extends Controller
                 'status'    => 'warning',
                 'message'   => 'Cannot find id'
             ]);
+        }
+    }
+
+    /**
+     * @param $wordId
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function practiceAWord($wordId)
+    {
+        if(intval($wordId)) {
+            $wordData = $this->vocabularyRepository->find(intval($wordId));
+            if ($wordData != null) {
+                JavaScript::put([
+                    'wordData' => $wordData
+                ]);
+
+                return view('frontend.vocabulary.practice_a_new_word');
+            } else {
+                abort(404);
+            }
+        } else {
+            abort(404);
         }
     }
 }

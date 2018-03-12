@@ -1,4 +1,4 @@
-#practice_vocabulary {
+#practice_vocabulary, #practice_a_new_word {
     .new-word-practice {
         font-weight: 600;
         margin-left: 5px;
@@ -54,5 +54,8 @@
             color: #52a218;
         }
     }
+}
 
+.tr-active {
+    background-color: #b6ffb9;
 }

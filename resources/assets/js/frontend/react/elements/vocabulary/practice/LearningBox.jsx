@@ -4,19 +4,26 @@ import Note from './Note';
 import Result from './Result';
 
 class LearningBox extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             text: '',
             results: [],
             error: '',
-            isValid: false
+            isValid: false,
+            mode: props.mode || 'normal'
         };
 
         this.onTextCheck = this.onTextCheck.bind(this);
         this.onKeyPress = this.onKeyPress.bind(this);
         this.onTextChange = this.onTextChange.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps);
+        this.state.mode = nextProps.mode || 'normal';
+        this.setState(this.state);
     }
 
     onTextChange(e) {
@@ -49,7 +56,7 @@ class LearningBox extends Component {
 
     render() {
         let result = this.state.results;
-        if (this.props.data.is_practiced && result.length === 0) {
+        if (this.props.data.is_practiced && result.length === 0 && this.state.mode === 'normal') {
             for (let i=0; i<20; i++) {
                 result.push(this.props.data.word);
             }
@@ -86,7 +93,7 @@ class LearningBox extends Component {
                                 </div>
 
                                 {
-                                    (result.length >= 20 || this.props.data.is_practiced) ? (
+                                    (result.length >= 20) ? (
                                         <div className="bg-finished-box">
                                             <div className="finish-text">Finished</div>
                                         </div>

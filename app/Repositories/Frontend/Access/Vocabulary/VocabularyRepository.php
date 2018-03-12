@@ -139,4 +139,15 @@ class VocabularyRepository extends BaseRepository
             ];
         }
     }
+
+    /**
+     * @param $userId
+     * @return mixed
+     */
+    public function getByUser($userId)
+    {
+        return $this->query()
+            ->where('user_id', '=', $userId)
+            ->first();
+    }
 }
