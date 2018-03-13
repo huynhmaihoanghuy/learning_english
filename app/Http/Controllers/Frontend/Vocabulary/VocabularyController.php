@@ -146,4 +146,27 @@ class VocabularyController extends Controller
             abort(404);
         }
     }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function test()
+    {
+        return view('frontend.vocabulary.test');
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getWordRandom()
+    {
+        $userId = access()->user()->id;
+        $data = $this->vocabularyRepository->getRandomByUser($userId);
+
+        return response()->json([
+            'result'    => 'ok',
+            'status'    => 'success',
+            'data'      => $data
+        ]);
+    }
 }

@@ -167,4 +167,17 @@ class VocabularyRepository extends BaseRepository
 
         return $query->first();
     }
+
+    /**
+     * @param $userId
+     * @return mixed
+     */
+    public function getRandomByUser($userId)
+    {
+        return $this->query()
+            ->where('is_practiced', '=', 1)
+            ->where('user_id', '=', $userId)
+            ->inRandomOrder()
+            ->first();
+    }
 }

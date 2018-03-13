@@ -18,9 +18,15 @@
                                 </div><!--panel-heading-->
 
                                 <div class="panel-body">
-                                    <div>
+                                    <div class="display-inline-block">
                                         <a href="{{ route('frontend.vocabulary.learn') }}">
                                             <button class="btn btn-primary">Learn</button>
+                                        </a>
+                                    </div>
+
+                                    <div class="display-inline-block">
+                                        <a href="{{ route('frontend.vocabulary.test') }}">
+                                            <button class="btn btn-primary">Test</button>
                                         </a>
                                     </div>
                                 </div><!--panel-body-->

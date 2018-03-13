@@ -10,5 +10,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('add-new-word', 'VocabularyController@addNewWord')->name('add-new-word');
         Route::post('remove-word', 'VocabularyController@removeWord')->name('remove-word');
         Route::get('update-practiced', 'VocabularyController@updatePracticed')->name('update-practiced');
+
+        Route::get('test', 'VocabularyController@test')->name('test');
+        Route::get('get-word-random', 'VocabularyController@getWordRandom')->name('get-word-random');
     });
 });
