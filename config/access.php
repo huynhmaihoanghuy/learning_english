@@ -42,6 +42,8 @@ return [
      */
     'role_user_table' => 'role_user',
 
+    'test_word_logs_table'  => 'test_word_logs',
+
     /*
      * Configurations for the user
      */

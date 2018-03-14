@@ -6,6 +6,10 @@ const testReducer = (state = {}, action) => {
             state = action.payload;
             break;
 
+        case types.TEST_WORD:
+            console.log('TEST_WORD',action.payload);
+            break;
+
         default:
             break;
     }

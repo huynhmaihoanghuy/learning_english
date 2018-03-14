@@ -12,6 +12,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('update-practiced', 'VocabularyController@updatePracticed')->name('update-practiced');
 
         Route::get('test', 'VocabularyController@test')->name('test');
+        Route::post('test-word', 'VocabularyController@testWord')->name('test-word');
         Route::get('get-word-random', 'VocabularyController@getWordRandom')->name('get-word-random');
     });
 });

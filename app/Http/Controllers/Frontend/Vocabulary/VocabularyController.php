@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Frontend\Vocabulary;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\Vocabulary\AddNewWordRequest;
 use App\Http\Requests\Frontend\Vocabulary\RemoveWordRequest;
+use App\Http\Requests\Frontend\Vocabulary\TestWordRequest;
+use App\Repositories\Frontend\Access\TestWordLog\TestWordLogRepository;
 use App\Repositories\Frontend\Access\Vocabulary\VocabularyRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -12,12 +14,15 @@ use JavaScript;
 class VocabularyController extends Controller
 {
     protected $vocabularyRepository;
+    protected $testWordLogRepository;
 
     public function __construct(
-        VocabularyRepository $vocabularyRepository
+        VocabularyRepository $vocabularyRepository,
+        TestWordLogRepository $testWordLogRepository
     )
     {
         $this->vocabularyRepository = $vocabularyRepository;
+        $this->testWordLogRepository = $testWordLogRepository;
     }
 
     /**
@@ -30,14 +35,16 @@ class VocabularyController extends Controller
 
     public function learn()
     {
-        $userId = access()->user()->id;
-        $vocabularyData = $this->vocabularyRepository->getVocabularyPracticeByUser($userId, '0');
-        if ($vocabularyData == null) {
-            return view('frontend.vocabulary.learn');
-        } else {
-            $date = date('m-d-Y', strtotime($vocabularyData->date));
-            return redirect()->route('frontend.vocabulary.practice', ['date' => $date]);
-        }
+//        $userId = access()->user()->id;
+//        $vocabularyData = $this->vocabularyRepository->getVocabularyPracticeByUser($userId, '0');
+//        if ($vocabularyData == null) {
+//            return view('frontend.vocabulary.learn');
+//        } else {
+//            $date = date('m-d-Y', strtotime($vocabularyData->date));
+//            return redirect()->route('frontend.vocabulary.practice', ['date' => $date]);
+//        }
+
+        return view('frontend.vocabulary.learn');
     }
 
     /**
@@ -168,5 +175,16 @@ class VocabularyController extends Controller
             'status'    => 'success',
             'data'      => $data
         ]);
+    }
+
+    /**
+     * @param TestWordRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function testWord(TestWordRequest $request)
+    {
+        $requestData = $request->all();
+        $response = $this->testWordLogRepository->create(['data' => $requestData]);
+        return response()->json($response);
     }
 }

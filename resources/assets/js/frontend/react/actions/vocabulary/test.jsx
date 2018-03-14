@@ -18,3 +18,22 @@ export const getWordRandom = () => {
             });
     }
 };
+
+export const testWord = (data) => {
+    return dispatch => {
+        axios.post(laroute.route('frontend.vocabulary.test-word'), data)
+            .then(response => {
+                if (response.data.result === 'ok') {
+                    dispatch({
+                        type: types.TEST_WORD,
+                        payload: response.data.data
+                    });
+                } else {
+                    swal('Oops...!', response.message, response.status);
+                }
+            })
+            .catch(error => {
+                swal('Oop...!', error, 'error');
+            })
+    }
+};
